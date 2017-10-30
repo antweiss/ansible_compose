@@ -1,0 +1,10 @@
+FROM docker.io/fedora
+
+EXPOSE 22
+
+RUN dnf -y update && dnf -y install openssh-server passwd sudo python && dnf clean all && mkdir /root/.ssh
+COPY id_rsa.pub  /root/.ssh/authorized_keys
+RUN chmod 700 /root/.ssh/ && chmod 600 /root/.ssh/authorized_keys
+COPY node1ep.sh /entrypoint.sh
+ENTRYPOINT ["/entrypoint.sh"]
+CMD ["/usr/sbin/sshd", "-D"]

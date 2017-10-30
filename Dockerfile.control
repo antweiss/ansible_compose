@@ -1,0 +1,4 @@
+FROM ubuntu:latest
+RUN apt-get update && apt-get install -y iputils-ping ansible less openssh-client vim && mkdir /root/.ssh
+COPY id_rsa /root/.ssh/
+RUN chmod -R 600 /root/.ssh

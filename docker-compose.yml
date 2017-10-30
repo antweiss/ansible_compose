@@ -1,0 +1,15 @@
+version: "3.0"
+
+services:
+  control:
+    build:
+      context: .
+      dockerfile: Dockerfile.control
+    command: sleep infinity
+  node1:
+    build:
+      context: .
+      dockerfile: Dockerfile.node1 
+    environment:
+      SSH_USERPASS: elbisna
+    command: ["/usr/sbin/sshd", "-D"]
